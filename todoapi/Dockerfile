@@ -35,11 +35,11 @@ RUN bundle install
 
 # Copy application into the container and use right permissions: passenger 
 # uses the app user for running the application 
-RUN mkdir /home/app/webapp 
-COPY . /home/app/webapp 
+RUN mkdir /home/app/todoapi 
+COPY . /home/app/todoapi 
 RUN usermod -u 1000 app 
-RUN chown -R app:app /home/app/webapp 
-WORKDIR /home/app/webapp 
+RUN chown -R app:app /home/app/todoapi 
+WORKDIR /home/app/todoapi 
 
 # Clean up APT when done. 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
