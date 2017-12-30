@@ -11,6 +11,10 @@ Note that you can use the `-d` switch with `docker-compose up` to detatch the ru
 
 `docker-compose up -d && docker-compose logs -f`
 
+To see the processes that have started with the `docker-compose up` command run `docker-compose ps`
+
+If you run into trouble with 'image not found' errors then you may need to clear the image cache. The best way to do this is to run `docker-compose down`
+
 ## Development
 
 ### Add a new Rails resource

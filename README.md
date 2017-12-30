@@ -24,5 +24,7 @@ Make sure 'setup.sh' and 'push.sh' are both executable!
 `chmod +x setup.sh`
 `chmod +x push.sh`
 
+Also, make sure that all the paths are correct for the application for example in webapp.conf etc.
+
 See all the above files in this repo for example content in each. Once all the above files are completed just run `./push.sh` to build and push the Docker image to Docker Hub (log into the `docker` cli tool first).
 

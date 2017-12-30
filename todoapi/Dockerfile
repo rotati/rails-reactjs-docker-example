@@ -9,6 +9,7 @@ CMD ["/sbin/my_init"]
 # Additional packages : we are adding the netcat package so we can 
 # make pings to the database service 
 RUN apt-get update && apt-get install -y -o Dpkg::Options::="--force-confold" netcat 
+RUN apt-get install -y tzdata
 
 # Enable Nginx and Passenger 
 RUN rm -f /etc/service/nginx/down 
