@@ -19,5 +19,10 @@ This will create our new Rails app (including the Gemfile.lock). The remaining f
 * Add `.dockerignore`
 * Add `push.sh` file for building and pushing the Docker image to Docker Hub.
 
+Make sure 'setup.sh' and 'push.sh' are both executable!
+
+`chmod +x setup.sh`
+`chmod +x push.sh`
+
 See all the above files in this repo for example content in each. Once all the above files are completed just run `./push.sh` to build and push the Docker image to Docker Hub (log into the `docker` cli tool first).
 
