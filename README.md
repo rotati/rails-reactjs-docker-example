@@ -1,5 +1,9 @@
 # Notes on how the apps were created
 
+## TODO
+
+* Persiste the development database data via volume mounts
+
 ## Backend: Rails API
 
 For details on developing with the Rails API check the apps [README](todoapi/README.md) file.

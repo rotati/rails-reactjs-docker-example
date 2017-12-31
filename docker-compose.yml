@@ -1,7 +1,17 @@
 version: '2'
 services:
+  todoapp:
+    build: ./todoapp
+    container_name: todoapp
+    command: npm run start
+    ports:
+      - '3000:3000'
+    volumes:
+     - ./todoapp:/app
+    environment:
+      NODE_ENV: development
   todoapi_setup:
-    build: .
+    build: ./todoapi
     depends_on:
       - postgres
     environment:
@@ -9,7 +19,7 @@ services:
     entrypoint: ./setup.sh
   todoapi:
     container_name: todoapi
-    build: .
+    build: ./todoapi
     depends_on:
       - postgres
       - todoapi_setup
@@ -18,7 +28,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - .:/home/app/todoapi
+      - ./todoapi:/home/app/todoapi
   postgres:
     image: postgres:9.6.6
     container_name: tododb
@@ -29,6 +39,7 @@ services:
     volumes_from:
       - postgres_data
   postgres_data:
+      container_name: tododb_data
       image: postgres:9.6.6
       volumes:
         - /var/lib/postgresql/data
