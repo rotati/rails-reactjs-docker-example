@@ -3,7 +3,6 @@ services:
   todoapp:
     build: ./todoapp
     container_name: todoapp
-    command: npm run start
     ports:
       - '3000:3000'
     volumes:

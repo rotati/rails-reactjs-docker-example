@@ -1,8 +1,4 @@
-# Notes on how the apps were created
-
-## TODO
-
-* Persiste the development database data via volume mounts
+## Notes on how the apps were initially created
 
 ## Backend: Rails API
 
@@ -33,4 +29,9 @@ See all the above files in this repo for example content in each. Once all the a
 
 ## Frontend: ReactJS Client
 
-### TODO - Stay Tuned! :)
+For details on developing with the ReactJS App check the apps [README](todoapp/README.md) file.
+
+## TODO
+
+* How to create and dockerize the frontend React JS app
+* Persiste the development database data via volume mounts
