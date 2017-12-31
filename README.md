@@ -38,3 +38,4 @@ This will create our new Rails app (including the package-lock.json). The remain
 * Persiste the development database data via volume mounts
 * Have development environment working without needing CORS by using reverse proxy Nginx
 * Have the tests run as part of the docker-compose process (in separate containers)
+* Setup integration testing for the applications 
