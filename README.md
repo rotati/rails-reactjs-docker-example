@@ -35,7 +35,10 @@ This will create our new Rails app (including the package-lock.json). The remain
 
 ## TODO
 
-* Persiste the development database data via volume mounts
+* Deploy a staging version to the cloud
 * Have development environment working without needing CORS by using reverse proxy Nginx
+
+## TODO (later)
+
 * Have the tests run as part of the docker-compose process (in separate containers)
 * Setup integration testing for the applications 
