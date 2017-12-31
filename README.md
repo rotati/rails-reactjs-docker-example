@@ -1,8 +1,6 @@
-# README
+# Notes on how the apps were created
 
-## Notes on how the apps were created
-
-# Rails API
+## Backend: Rails API
 
 For details on developing with the Rails API check the apps [README](todoapi/README.md) file.
 
@@ -28,3 +26,6 @@ Also, make sure that all the paths are correct for the application for example i
 
 See all the above files in this repo for example content in each. Once all the above files are completed just run `./push.sh` to build and push the Docker image to Docker Hub (log into the `docker` cli tool first).
 
+## Frontend: ReactJS Client
+
+### TODO - Stay Tuned! :)

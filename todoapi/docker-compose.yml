@@ -21,6 +21,7 @@ services:
       - .:/home/app/todoapi
   postgres:
     image: postgres:9.6.6
+    container_name: tododb
     environment:
       - POSTGRES_PASSWORD=mysecretpassword
       - POSTGRES_USER=todoapi
