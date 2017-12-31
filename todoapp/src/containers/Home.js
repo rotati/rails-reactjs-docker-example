@@ -92,13 +92,11 @@ export default class Home extends Component {
   }
 
   renderRailsAPINotesList(notes) {
-    console.log("Here be a note:", notes)
     return [{}].concat(notes).map(
       (note, i) =>
         <ListGroupItem
           key={note.id}
           href={`/notes/${note.id}`}
-          // header={note.content.trim().split("\n")[0]}
           header={note.content}
         >
           {"Created: " + new Date(note.created_at).toLocaleString()}
@@ -107,11 +105,6 @@ export default class Home extends Component {
   }
 
   renderRailsAPINotes() {
-    // var notes = [{
-    //   "id": 1, 
-    //   "content": 'just testing!', 
-    //   "created_at": '2017-12-31 04:53:03'
-    // }];
     return (
       <div className="notes">
         <PageHeader>Your Rails API Notes!</PageHeader>
