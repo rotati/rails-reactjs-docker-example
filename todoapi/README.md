@@ -31,4 +31,4 @@ Run `docker exec -it todoapi bash` which will connect you a permanent terminal s
 
 Run the following to add a new article to the database via the REST API:
 
-`curl -H "Content-Type: application/json" -X POST -d '{"title":"my brand new article","body":"This was made during a demo!"}' http://localhost/articles`
+`curl -H "Content-Type: application/json" -X POST -d '{"content":"my first note!"}' http://localhost/notes`

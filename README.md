@@ -14,6 +14,7 @@ This will create our new Rails app (including the Gemfile.lock). The remaining f
 * Add `rails-env.conf`
 * Add `setup.sh`
 * Add a customer logger in `config/application.rb` which sends logs to STDOUT so that we can use `docker-compose logs -f` (see below for starting the app).
+* Update the database.yml file with the correct credentials for your database
 * Add `.dockerignore`
 * Add `push.sh` file for building and pushing the Docker image to Docker Hub.
 

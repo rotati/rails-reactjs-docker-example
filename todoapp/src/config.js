@@ -12,5 +12,8 @@ export default {
     APP_CLIENT_ID: "16etj3in7h94o5bd5dnqrng5o4",
     REGION: "ap-southeast-1",
 		IDENTITY_POOL_ID: "ap-southeast-1:93bbb985-fd75-488f-966b-8052552af3f6"
-  }
+	},
+	railsApiGateway: {
+		URL: "http://localhost"
+	}
 };

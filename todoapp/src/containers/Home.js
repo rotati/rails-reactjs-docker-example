@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { invokeRailsApi } from '../libs/railsApiLib';
 import { invokeApig } from '../libs/awsLib';
 import "./Home.css";
 
@@ -12,21 +13,6 @@ export default class Home extends Component {
       isLoading: true,
       notes: []
     };
-  }
-
-  async componentDidMount() {
-    if (!this.props.isAuthenticated) {
-      return;
-    }
-
-    try {
-      const results = await this.notes();
-      this.setState({ notes: results });
-    } catch (e) {
-      alert(e);
-    }
-
-    this.setState({ isLoading: false });
   }
 
   notes() {
@@ -90,11 +76,58 @@ export default class Home extends Component {
     );
   }
 
+  async componentDidMount() {
+    try {
+      const results = await this.railsAPINotes();
+      this.setState({ notes: results });
+    } catch (e) {
+      alert(e);
+    }
+
+    this.setState({ isLoading: false });
+  }
+
+  railsAPINotes() {
+    return invokeRailsApi({ path: "/notes" });
+  }
+
+  renderRailsAPINotesList(notes) {
+    console.log("Here be a note:", notes)
+    return [{}].concat(notes).map(
+      (note, i) =>
+        <ListGroupItem
+          key={note.id}
+          href={`/notes/${note.id}`}
+          // header={note.content.trim().split("\n")[0]}
+          header={note.content}
+        >
+          {"Created: " + new Date(note.created_at).toLocaleString()}
+        </ListGroupItem>
+    );
+  }
+
+  renderRailsAPINotes() {
+    // var notes = [{
+    //   "id": 1, 
+    //   "content": 'just testing!', 
+    //   "created_at": '2017-12-31 04:53:03'
+    // }];
+    return (
+      <div className="notes">
+        <PageHeader>Your Rails API Notes!</PageHeader>
+        <ListGroup>
+          {this.renderRailsAPINotesList(this.state.notes)}
+        </ListGroup>
+      </div>
+    )
+  }
+
   render() {
     return (
       <div className="Home">
-        {this.props.isAuthenticated ? this.renderNotes() : this.renderLander()}
+        {this.renderRailsAPINotes()}
       </div>
     );
   }
 }
+
