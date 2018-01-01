@@ -31,5 +31,12 @@ module Todoapi
     config.api_only = true
 
     config.logger = Logger.new(STDOUT)
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
   end
 end

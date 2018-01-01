@@ -14,6 +14,7 @@ export default {
 		IDENTITY_POOL_ID: "ap-southeast-1:93bbb985-fd75-488f-966b-8052552af3f6"
 	},
 	railsApiGateway: {
-		URL: "http://localhost"
+		URL: "http://todoapi.kubernetes.blinkermail.com"
+		// URL: "http://localhost"
 	}
 };

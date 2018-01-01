@@ -57,7 +57,7 @@ For *first time* deployment you will need the kube config files. Add the followi
 * Add file kube/deployments/postgres-deployment.yml
 * Add file kube/deployments/todoapi-deployment.yml
 * Add file kube/jobs/setup-job.yml
-* Add a secret for production (this should be encrypted of course) `docker-compose run --rm todoapi bin/rake secret RAILS_ENV=production` (NOTE: copy the output to your secrets file)
+* Add a secret for production (this should be encrypted of course) `docker-compose run --rm todoapi bin/rake secret RAILS_ENV=producretion` (NOTE: copy the output to your secrets file)
 * Create the EBS Volume for use on the database node `aws ec2 create-volume --region ap-southeast-1 --availability-zone ap-southeast-1a --size 10 --volume-type gp2` and add the volume id to the postgres-deployment.yml file
 * Run `deploy/migrate.sh` (if there are migrations to run)
 * Run `kubectl create -f kube/deployments/`
