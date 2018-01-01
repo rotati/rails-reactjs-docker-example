@@ -9,8 +9,9 @@ spec:
     spec:
       containers:
       - name: setup
-        image: rotati/todoapi:LAST_COMMIT
+        image: rotati/todoapi:90d92cd
         command: ["/bin/bash", "./setup.production.sh"]
+        # command: ["bin/rake", "db:migrate", "RAILS_ENV=production"]
         env:
         - name: PASSENGER_APP_ENV
           value: production

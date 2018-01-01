@@ -83,4 +83,4 @@ production:
   <<: *default
   database: todoapi_production
   username: todoapi
-  password: <%= ENV['TODOAPI_DATABASE_PASSWORD'] %>
+  password: mysecretpassword

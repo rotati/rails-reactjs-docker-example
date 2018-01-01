@@ -48,5 +48,5 @@ spec:
       volumes:
         - name: postgres-persistent-storage
           awsElasticBlockStore:
-            volumeID: vol-0e9f58a7e77813022
+            volumeID: vol-0af43f1a3872b99dc
             fsType: ext4
