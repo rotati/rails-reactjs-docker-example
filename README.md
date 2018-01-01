@@ -32,21 +32,33 @@ The following explains how to setup and deploy an application to AWS using Kuber
 
 * Install kops `brew install kops`
 * In your AWS account create a KOPS IAM user with Administrator access. The name of the user can be anything. Make a note of the keys.
-* In your AWS account create a subdomain hosted zone which will be used by KOPS. For example, create a new Route 53 Hosted Zone for 'k8s.stemware.io'. Then in the Hosted Zone for the parent, add a new Record Set for 'k8s.stemware.io' of type 'Nameserver' and pass in the Nameserver values from the sub-domain Hosted Zone just created.
+* In your AWS account create a subdomain hosted zone which will be used by KOPS. For example, create a new Route 53 Hosted Zone for 'kubernetes.blinkermail.com'. Then in the Hosted Zone for the parent, add a new Record Set for 'kubernetes.blinkermail.com' of type 'Nameserver' and pass in the Nameserver values from the sub-domain Hosted Zone just created.
 * In your AWS account create a new S3 Bucket to store the state of the k8s cluster. Give it a name 'kops-state-<some-unique-id>' e.g. 'kops-state-rt7665'
-* Run the kops create cluster command like so: `kops create cluster --name=k8s.stemware.io --state=s3://kops-state-rt7665 --zones=ap-southeast-1a --node-count=2 --node-size=t2.micro --master-size=t2.micro --dns-zone=k8s.stemware.io`
+* Run the kops create cluster command like so: `kops create cluster --name=kubernetes.blinkermail.com --state=s3://kops-state-rt7665 --zones=ap-southeast-1a --node-count=2 --node-size=t2.micro --master-size=t2.micro --dns-zone=kubernetes.blinkermail.com`
 * To avoid having to use the '--state' flag for each command run `export KOPS_STATE_STORE=s3://kops-state-rt7665`
-* To actually apply the new cluster in AWS you need to run the following update command `kops update cluster k8s.stemware.io --state=s3://kops-state-rt7665  --yes`
-* To edit the cluster run `kops edit cluster --name=k8s.stemware.io --state=s3://kops-state-rt7665 `
+* To actually apply the new cluster in AWS you need to run the following update command `kops update cluster kubernetes.blinkermail.com --state=s3://kops-state-rt7665  --yes`
+* To edit the cluster run `kops edit cluster --name=kubernetes.blinkermail.com --state=s3://kops-state-rt7665 `
 * To update the number of nodes in the cluster edit the ig config like so `kops edit ig nodes`
-* Validate the cluster as follows `kops validate cluster --state=s3://kops-state-rt7665`
-* NOTE: To delete the cluster run the following `kops delete cluster --name=k8s.stemware.io --state=s3://kops-state-rt7665 `
+* Validate the cluster as follows `kops validate cluster --name=kubernetes.blinkermail.com --state=s3://kops-state-rt7665`
+* list nodes: `kubectl get nodes --show-labels`
+* ssh to the master: `ssh -i ~/.ssh/id_rsa admin@api.kubernetes.blinkermail.com`
+* To delete the cluster run the following `kops delete cluster --name=kubernetes.blinkermail.com --state=s3://kops-state-rt7665 `
+* Delete any volumes created also! `aws ec2 delete-volume --volume-id=<VOLUME-ID>`
 
 ## Deploy an application to the cluster
 
 In this repo example, we can deploy the application to our running cluster of nodes in AWS by simply checking the current context of our `kubectl cluster-info` command is set to our AWS cluster and then creating our services, jobs and deployments withing our cluster usign the `kubectl create` command. NOTE: this has all been scriped in a bash file (see below).
 
-For this app we would run the following:
+For *first time* deployment you will need the kube config files. Add the following:
+
+* Add file kube/deployments/postgres-deployment.yml
+* Add file kube/deployments/todoapi-deployment.yml
+* Add file kube/jobs/setup-job.yml
+* Create the EBS Volume for use on the database node `aws ec2 create-volume --region ap-southeast-1 --availability-zone ap-southeast-1a --size 10 --volume-type gp2` and add the volume id to the postgres-deployment.yml file
+* Run `kubectl create -f kube/deployments/`
+* Run `kubectl create -f kube/jobs/`
+
+Thereafter, as we continually develop the application we can do the following:
 
 * Make changes to the application as necessary (see development steps above)
 * Commit these changes to github
@@ -78,7 +90,9 @@ This will create our new Rails app (including the package-lock.json). The remain
 ## TODO
 
 * Deploy a Staging version to the cloud
-* Setup environment based deploys https://github.com/facebookincubator/create-react-app/issues/790
+* Deploy the frontend to cloud front
+* Setup environment based deploys for the client and server https://github.com/facebookincubator/create-react-app/issues/790
+* Auto deploy entire app via CI server (codeship)
 
 ## TODO (later)
 
