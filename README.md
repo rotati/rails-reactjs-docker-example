@@ -43,7 +43,7 @@ The following explains how to setup and deploy an application to AWS using Kuber
 * Validate the cluster as follows `kops validate cluster --name=kubernetes.blinkermail.com --state=s3://kops-state-rt7665`
 * list nodes: `kubectl get nodes --show-labels`
 * ssh to the master: `ssh -i ~/.ssh/id_rsa admin@api.kubernetes.blinkermail.com`
-* To delete the cluster run the following `kops delete cluster --name=kubernetes.blinkermail.com --state=s3://kops-state-rt7665 `
+* To delete the cluster run the following `kops delete cluster --name=kubernetes.blinkermail.com --state=s3://kops-state-rt7665`
 * Delete any volumes created also! `aws ec2 delete-volume --volume-id=<VOLUME-ID>`
 
 api.kubernetes.blinkermail.com
@@ -94,10 +94,10 @@ This will create our new Rails app (including the package-lock.json). The remain
 
 ## TODO
 
-* Deploy a Staging version to the cloud
-* Encript the production database password and the application secret
-* Deploy the frontend to cloud front
-* Setup environment based deploys for the client and server https://github.com/facebookincubator/create-react-app/issues/790
+* Create a specific staging environment for Rails app and deploy that (http://www.tothenew.com/blog/kubernetes-namespaces-one-cluster-for-different-environments/ http://blog.kubernetes.io/2015/08/using-kubernetes-namespaces-to-manage.html)
+* Create a specific staging environment for the React JS app and deploy that (https://github.com/facebookincubator/create-react-app/issues/790)
+* Test quickly switching between the two envionments (should work seamlessly)
+* Encript the Staging and Production database password and the application secret
 * Auto deploy entire app via CI server (codeship)
 
 ## TODO (later)
@@ -105,3 +105,6 @@ This will create our new Rails app (including the package-lock.json). The remain
 * Have the tests run as part of the docker-compose process (in separate containers)
 * Setup integration testing for the applications 
 * Have development environment working without needing CORS by using reverse proxy Nginx
+* Use RDS for the Postgres database in Production 
+* Deploy the frontend to cloud front
+* Document the API using Swagger (https://www.sitepoint.com/do-the-right-thing-and-document-your-rails-api-with-swagger/)
