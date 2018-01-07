@@ -37,16 +37,13 @@ The following explains how to setup and deploy an application to AWS using Kuber
 * Run the kops create cluster command like so: `kops create cluster --name=kubernetes.blinkermail.com --state=s3://kops-state-rt7665 --zones=ap-southeast-1a --node-count=2 --node-size=t2.micro --master-size=t2.micro --dns-zone=kubernetes.blinkermail.com`
 * To avoid having to use the '--state' flag for each command run `export KOPS_STATE_STORE=s3://kops-state-rt7665`
 * To actually apply the new cluster in AWS you need to run the following update command `kops update cluster kubernetes.blinkermail.com --state=s3://kops-state-rt7665  --yes`
-* Setup a DNS name alias for the load balancer so that it can be accessed. This is done in Route 53 using the alias opton.
-* To edit the cluster run `kops edit cluster --name=kubernetes.blinkermail.com --state=s3://kops-state-rt7665 `
-* To update the number of nodes in the cluster edit the ig config like so `kops edit ig nodes`
 * Validate the cluster as follows `kops validate cluster --name=kubernetes.blinkermail.com --state=s3://kops-state-rt7665`
 * list nodes: `kubectl get nodes --show-labels`
+* To edit the cluster run `kops edit cluster --name=kubernetes.blinkermail.com --state=s3://kops-state-rt7665 `
+* To update the number of nodes in the cluster edit the ig config like so `kops edit ig nodes`
 * ssh to the master: `ssh -i ~/.ssh/id_rsa admin@api.kubernetes.blinkermail.com`
 * To delete the cluster run the following `kops delete cluster --name=kubernetes.blinkermail.com --state=s3://kops-state-rt7665`
 * Delete any volumes created also! `aws ec2 delete-volume --volume-id=<VOLUME-ID>`
-
-api.kubernetes.blinkermail.com
 
 ## Deploy an application to the cluster
 
@@ -59,8 +56,10 @@ For *first time* deployment you will need the kube config files. Add the followi
 * Add file kube/jobs/setup-job.yml
 * Add a secret for production (this should be encrypted of course) `docker-compose run --rm todoapi bin/rake secret RAILS_ENV=producretion` (NOTE: copy the output to your secrets file)
 * Create the EBS Volume for use on the database node `aws ec2 create-volume --region ap-southeast-1 --availability-zone ap-southeast-1a --size 10 --volume-type gp2` and add the volume id to the postgres-deployment.yml file
-* Run `deploy/migrate.sh` (if there are migrations to run)
+* Check the current context of kubectl is as expected `kubectl cluster-info`
 * Run `kubectl create -f kube/deployments/`
+* Run `deploy/migrate.sh` (if there are migrations to run)
+* Setup a DNS name alias for the load balancer so that it can be accessed. This is done in Route 53 using the alias opton.
 * Refer to notes above (under KOPS) for interacting with the cluster itself.
 
 Thereafter, as we continually develop the application we can do the following:

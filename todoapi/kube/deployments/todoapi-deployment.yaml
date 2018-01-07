@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: todoapi
+  namespace: staging
   labels:
     app: todoapi
 spec:
@@ -16,6 +17,7 @@ apiVersion: extensions/v1beta1 #TODO update version
 kind: Deployment
 metadata:
   name: todoapi
+  namespace: staging
   labels:
     app: todoapi
 spec:
@@ -27,11 +29,11 @@ spec:
         tier: backend
     spec:
       containers:
-      - image: rotati/todoapi:90d92cd
+      - image: rotati/todoapi:68f7117
         name: todoapi
         env:
         - name: PASSENGER_APP_ENV
-          value: production
+          value: staging
         ports:
         - containerPort: 80
           name: todoapi

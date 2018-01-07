@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: setup
+  namespace: staging
 spec:
   template:
     metadata:
@@ -10,8 +11,8 @@ spec:
       containers:
       - name: setup
         image: rotati/todoapi:LAST_COMMIT
-        command: ["/bin/bash", "./setup.production.sh"]
+        command: ["/bin/bash", "./setup.staging.sh"]
         env:
         - name: PASSENGER_APP_ENV
-          value: production
+          value: staging
       restartPolicy: Never
