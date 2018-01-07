@@ -1,0 +1,11 @@
+{
+	"railsApiGateway": {
+		"URL": "http://localhost"
+	},
+  "cognito": {
+    "USER_POOL_ID": "something",
+		"APP_CLIENT_ID": "something",
+    "REGION": "",
+		"IDENTITY_POOL_ID": ""
+	}
+}

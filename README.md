@@ -93,10 +93,10 @@ This will create our new Rails app (including the package-lock.json). The remain
 
 ## TODO
 
-* Create a specific staging environment for Rails app and deploy that (http://www.tothenew.com/blog/kubernetes-namespaces-one-cluster-for-different-environments/ http://blog.kubernetes.io/2015/08/using-kubernetes-namespaces-to-manage.html)
-* Create a specific staging environment for the React JS app and deploy that (https://github.com/facebookincubator/create-react-app/issues/790)
-* Test quickly switching between the two envionments (should work seamlessly)
+* Create a specific staging environment for the React JS app and deploy that (https://github.com/facebookincubator/create-react-app/issues/790
+https://stackoverflow.com/questions/30568796/how-to-store-configuration-file-and-read-it-using-react)
 * Encript the Staging and Production database password and the application secret
+* Test quickly switching between the two envionments (should work seamlessly)
 * Auto deploy entire app via CI server (codeship)
 
 ## TODO (later)

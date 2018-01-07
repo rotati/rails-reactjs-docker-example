@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { invokeRailsApi } from '../libs/railsApiLib';
-import { invokeApig } from '../libs/awsLib';
+// import { invokeApig } from '../libs/awsLib';
 import "./Home.css";
 
 export default class Home extends Component {
@@ -15,9 +15,9 @@ export default class Home extends Component {
     };
   }
 
-  notes() {
-    return invokeApig({ path: "/notes" });
-  }
+  // notes() {
+  //   return invokeApig({ path: "/notes" });
+  // }
 
   renderNotesList(notes) {
     return [{}].concat(notes).map(
@@ -107,7 +107,7 @@ export default class Home extends Component {
   renderRailsAPINotes() {
     return (
       <div className="notes">
-        <PageHeader>Your Rails API Notes!</PageHeader>
+        <PageHeader>Your Rails API Notes! {process.env.NODE_ENV}</PageHeader>
         <ListGroup>
           {this.renderRailsAPINotesList(this.state.notes)}
         </ListGroup>

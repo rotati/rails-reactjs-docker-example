@@ -7,8 +7,6 @@ services:
       - '3000:3000'
     volumes:
      - ./todoapp:/app
-    environment:
-      NODE_ENV: development
   todoapi_setup:
     build: ./todoapi
     depends_on:

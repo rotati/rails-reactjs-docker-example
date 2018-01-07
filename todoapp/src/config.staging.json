@@ -1,0 +1,11 @@
+{
+	"railsApiGateway": {
+		"URL": "http://todoapi.kubernetes.blinkermail.com"
+	},
+  "cognito": {
+    "USER_POOL_ID": "",
+		"APP_CLIENT_ID": "",
+    "REGION": "",
+		"IDENTITY_POOL_ID": ""
+	}
+}
